@@ -1,0 +1,10 @@
+.DS_Store
+
+*.sublime-project
+*.sublime-workspace
+
+.bundle
+.yardoc
+doc
+*.gem
+Gemfile.lock
