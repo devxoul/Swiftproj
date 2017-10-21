@@ -71,7 +71,7 @@ module Swiftproj
       action = Xcodeproj::XCScheme::BuildAction.new
       for entry in scheme.build_action.entries
         blueprint_name = entry.buildable_references[0].blueprint_name
-        if not buildable_target_names.include? blueprint_name
+        if buildable_target_names.include? blueprint_name
           action.add_entry(entry)
         end
       end

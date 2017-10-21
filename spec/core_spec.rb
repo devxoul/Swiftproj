@@ -229,10 +229,16 @@ RSpec.describe Swiftproj::Core do
       build_action.add_entry(new_entry("Nimble"))
       build_action.add_entry(new_entry("Stubber"))
 
-      @scheme = instance_spy(
-        Xcodeproj::XCScheme,
-        :build_action => build_action
-      )
+      class Scheme
+        attr_accessor :build_action
+
+        def save!
+        end
+      end
+
+      @scheme = Scheme.new
+      @scheme.build_action = build_action
+      allow(@scheme).to receive(:save!)
     end
 
     it "configures a scheme to have only buildable targets" do
