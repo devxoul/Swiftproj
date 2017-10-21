@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require "swiftproj"
+
+ui = $stdout
+shell = Swiftproj::Shell.new
+file = File
+core = Swiftproj::Core.new(:ui => ui,
+                           :shell => shell,
+                           :file => file)
+command = Swiftproj::Command.new(:core => core, :ui => ui)
+command.run(ARGV)
