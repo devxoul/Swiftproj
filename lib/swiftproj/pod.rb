@@ -25,9 +25,25 @@ module Pod
     def method_missing(*args)
       # do nothing
     end
+
+    def ==(spec)
+      return false unless self.class == spec.class
+      return false unless self.version == spec.version
+      return false unless self.ios == spec.ios
+      return false unless self.osx == spec.osx
+      return false unless self.tvos == spec.tvos
+      return false unless self.watchos == spec.watchos
+      return true
+    end
   end
 
   class OS
     attr_accessor :deployment_target
+
+    def ==(os)
+      return false unless self.class == os.class
+      return false unless self.deployment_target == os.deployment_target
+      return true
+    end
   end
 end

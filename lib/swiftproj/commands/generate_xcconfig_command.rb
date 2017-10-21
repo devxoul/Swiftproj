@@ -12,7 +12,8 @@ module Swiftproj
         raise Swiftproj::NoSuchFileError.new(podspec_path)
       end
 
-      @core.generate_xcconfig(podspec_content)
+      podspec = Pod::Spec.from_podspec(podspec_content)
+      @core.generate_xcconfig(podspec)
     end
   end
 end

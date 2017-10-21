@@ -63,4 +63,20 @@ RSpec.describe Pod::Spec do
       }.to raise_error(Swiftproj::MissingPodspecVersionError)
     end
   end
+
+  describe "==" do
+    it "equals to other pod" do
+      content = %{
+        Pod::Spec.new do |s|
+          s.version = "1.0.0"
+          s.ios.deployment_target = "8.0"
+          s.osx.deployment_target = "10.11"
+          s.watchos.deployment_target = "2.0"
+        end
+      }
+      spec1 = Pod::Spec.from_podspec(content)
+      spec2 = Pod::Spec.from_podspec(content)
+      expect(spec1).to eq spec2
+    end
+  end
 end
