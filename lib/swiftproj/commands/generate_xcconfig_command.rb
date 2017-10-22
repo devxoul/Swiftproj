@@ -4,6 +4,12 @@ module Swiftproj
       return "Generates a Xcode project file"
     end
 
+    def self.options()
+      return {
+        "--podspec" => "A path for podspec file",
+      }
+    end
+
     def run(options)
       podspec_path = options["--podspec"]
       if podspec_path.nil?

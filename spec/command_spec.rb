@@ -13,6 +13,14 @@ RSpec.describe Swiftproj::Command do
     expect(@ui).to have_received(:puts)
   end
 
+  it "displays a help message for subcommand when options contains --help" do
+    # when
+    @command.run(["generate-xcconfig", "--podspec", "foo.podspec", "--help"])
+
+    # assert
+    expect(@ui).to have_received(:puts).with(/--podspec/)
+  end
+
   describe "#command_class" do
     it "returns a proper command class" do
       expect(@command.get_command("generate-xcodeproj")).to \

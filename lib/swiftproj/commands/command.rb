@@ -13,7 +13,11 @@ module Swiftproj
         command_name = argv[0] || 'help'
         command = self.get_command(command_name)
         options = self.parse_options(argv[1..-1])
-        command.run(options)
+        if options.include?("--help") or options.include?("-h")
+          @ui.puts(command.class.help_message)
+        else
+          command.run(options)
+        end
       rescue Exception => e
         @ui.puts("[!] #{e.message}".red)
       end
@@ -69,6 +73,16 @@ module Swiftproj
 
     def self.description()
       return ""
+    end
+
+    def self.options()
+      return {}
+    end
+
+    def self.help_message()
+      return self.options
+        .map { |name, description| "    " + name.blue.ljust(30) + description }
+        .join("\n")
     end
   end
 end

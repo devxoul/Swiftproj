@@ -6,6 +6,14 @@ module Swiftproj
       return "Configures a scheme to have buildable targets only"
     end
 
+    def self.options()
+      return {
+        "--project" => "A xcodeproj path (e.g. ReactorKit.xcodeproj)",
+        "--scheme" => "A scheme name",
+        "--buildable-targets" => "Names for buildable target, seprated by comma (e.g. URLNavigator,URLMatcher)",
+      }
+    end
+
     def run(options)
       project_path = options["--project"]
       scheme_name = options["--scheme"]

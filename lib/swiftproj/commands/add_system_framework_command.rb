@@ -6,6 +6,14 @@ module Swiftproj
       return "Adds a system framework to an existing target"
     end
 
+    def self.options()
+      return {
+        "--project" => "A xcodeproj path (e.g. ReactorKit.xcodeproj)",
+        "--target" => "A target name",
+        "--framework" => "A framework path to be added (e.g. Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework)",
+      }
+    end
+
     def run(options)
       project_path = options["--project"]
       target_name = options["--target"]
