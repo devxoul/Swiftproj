@@ -7,7 +7,7 @@ RSpec.describe Swiftproj::VersionCommand do
 
   it "displays current version" do
     # when
-    @command.run(%w(version))
+    @command.run({})
 
     # assert
     expect(@ui).to have_received(:puts).with(Swiftproj::VERSION)
