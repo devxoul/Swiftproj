@@ -6,5 +6,6 @@
 .bundle
 .yardoc
 doc
+coverage
 *.gem
 Gemfile.lock
