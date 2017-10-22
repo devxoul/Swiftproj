@@ -35,7 +35,7 @@ $ swiftproj configure-scheme \
     --scheme URLNavigator-Package \
     --targets URLNavigator,URLMatcher
 $ carthage build --no-skip-current
-$ carthage archive URLNavigator,URLMatcher
+$ carthage archive URLNavigator URLMatcher
 ```
 
 ## Installation
