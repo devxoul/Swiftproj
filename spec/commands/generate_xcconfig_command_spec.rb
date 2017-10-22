@@ -6,12 +6,15 @@ RSpec.describe Swiftproj::GenerateXcconfigCommand do
   end
 
   it "raises an error when the required argument is missing" do
-    expect { @command.run([]) }.to raise_error(Swiftproj::MissingArgumentError)
+    expect { @command.run({}) }.to raise_error(Swiftproj::MissingArgumentError)
+    expect { @command.run({ "--podspec" => nil }) }.to \
+      raise_error(Swiftproj::MissingArgumentError)
   end
 
   it "raises an error when there's no podspec" do
     allow(@file).to receive(:open).and_raise(Errno::ENOENT.new)
-    expect { @command.run(["foo"]) }.to raise_error(Swiftproj::NoSuchFileError)
+    expect { @command.run({ "--podspec" => "foo" }) }.to \
+      raise_error(Swiftproj::NoSuchFileError)
   end
 
   it "executes Core#generate_xcconfig" do
@@ -29,7 +32,7 @@ RSpec.describe Swiftproj::GenerateXcconfigCommand do
     allow(@file).to receive(:open).and_return(podspec_file)
 
     # when
-    @command.run(["URLNavigator.podspec"])
+    @command.run({ "--podspec" => "URLNavigator.podspec" })
 
     # assert
     podspec = Pod::Spec.from_podspec(podspec_content)

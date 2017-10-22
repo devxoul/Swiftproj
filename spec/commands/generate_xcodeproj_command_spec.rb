@@ -15,9 +15,14 @@ RSpec.describe Swiftproj::GenerateXcodeprojCommand do
 
   it "forwards arguments to Core#generate_xcodeproj" do
     # when
-    @command.run(["foo", "bar"])
+    @command.run({
+      "--enable-code-coverage" => nil,
+      "--override-xcconfig" => "MyConfig.xcconfig",
+    })
 
     # assert
-    expect(@core).to have_received(:generate_xcodeproj).with(["foo", "bar"])
+    expect(@core).to have_received(:generate_xcodeproj).with(array_including([
+      "--enable-code-coverage", "--override-xcconfig",  "MyConfig.xcconfig"
+    ]))
   end
 end

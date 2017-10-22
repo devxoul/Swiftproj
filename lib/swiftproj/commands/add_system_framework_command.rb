@@ -3,16 +3,20 @@ require "swiftproj"
 module Swiftproj
   class AddSystemFrameworkCommand < Command
     def run(options)
-      case options.count
-      when 0
-        raise Swiftproj::MissingArgumentError.new("project_path")
-      when 1
-        raise Swiftproj::MissingArgumentError.new("target_name")
-      when 2
-        raise Swiftproj::MissingArgumentError.new("framework_path")
+      project_path = options["--project"]
+      target_name = options["--target"]
+      framework_path = options["--framework"]
+
+      if project_path.nil?
+        raise Swiftproj::MissingArgumentError.new("--project")
+      end
+      if target_name.nil?
+        raise Swiftproj::MissingArgumentError.new("--target")
+      end
+      if framework_path.nil?
+        raise Swiftproj::MissingArgumentError.new("--framework")
       end
 
-      (project_path, target_name, framework_path) = options
       begin
         project = @project_class.open(project_path)
       rescue

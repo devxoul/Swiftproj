@@ -25,4 +25,32 @@ RSpec.describe Swiftproj::Command do
         raise_exception(Swiftproj::UnknownCommandError)
     end
   end
+
+  describe "#parse_options" do
+    it "returns an empty hash when there is no argv" do
+      options = @command.parse_options([])
+      expect(options).to eq Hash.new
+    end
+
+    it "returns a single option with no value" do
+      options = @command.parse_options(["--foo"])
+      expect(options).to eq({ "--foo" => nil })
+    end
+
+    it "returns a single option with a key and a value" do
+      options = @command.parse_options(["--foo", "bar"])
+      expect(options).to eq({ "--foo" => "bar" })
+    end
+
+    it "returns multiple options" do
+      argv = ["--foo", "--bar", "--hello", "world", "-a", "b"]
+      options = @command.parse_options(argv)
+      expect(options).to eq({
+        "--foo" => nil,
+        "--bar" => nil,
+        "--hello" => "world",
+        "-a" => "b",
+      })
+    end
+  end
 end

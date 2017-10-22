@@ -3,16 +3,20 @@ require "swiftproj"
 module Swiftproj
   class ConfigureSchemeCommand < Command
     def run(options)
-      case options.count
-      when 0
-        raise Swiftproj::MissingArgumentError.new("project_path")
-      when 1
-        raise Swiftproj::MissingArgumentError.new("scheme_name")
-      when 2
-        raise Swiftproj::MissingArgumentError.new("buildable_target_names")
+      project_path = options["--project"]
+      scheme_name = options["--scheme"]
+      buildable_target_names = options["--buildable-targets"]
+
+      if project_path.nil?
+        raise Swiftproj::MissingArgumentError.new("--project")
+      end
+      if scheme_name.nil?
+        raise Swiftproj::MissingArgumentError.new("--scheme")
+      end
+      if buildable_target_names.nil?
+        raise Swiftproj::MissingArgumentError.new("--buildable-targets")
       end
 
-      (project_path, scheme_name, buildable_target_names) = options
       path = "#{project_path}/xcshareddata/xcschemes/#{scheme_name}.xcscheme"
       begin
         scheme = @scheme_class.new(path)

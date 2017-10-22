@@ -12,7 +12,8 @@ module Swiftproj
       begin
         command_name = argv[0] || 'help'
         command = self.get_command(command_name)
-        command.run(argv[1..-1])
+        options = self.parse_options(argv[1..-1])
+        command.run(options)
       rescue Exception => e
         @ui.puts("[!] #{e.message}".red)
       end
@@ -35,6 +36,23 @@ module Swiftproj
       rescue
         raise Swiftproj::UnknownCommandError
       end
+    end
+
+    def parse_options(argv)
+      options = Hash.new
+      return options if argv.nil?
+
+      current_key = nil
+      for arg in argv
+        if arg.start_with? "-"
+          current_key = arg
+          options[current_key] = nil
+        elsif not current_key.nil?
+          options[current_key] = arg
+          current_key = nil
+        end
+      end
+      return options
     end
   end
 end
