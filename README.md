@@ -2,6 +2,7 @@
 
 [![Gem](https://img.shields.io/gem/v/swiftproj.svg)](https://rubygems.org/gems/swiftproj)
 [![Build Status](https://travis-ci.org/devxoul/Swiftproj.svg?branch=master)](https://travis-ci.org/devxoul/Swiftproj)
+[![Codecov](https://img.shields.io/codecov/c/github/devxoul/Swiftproj.svg)](https://codecov.io/gh/devxoul/Swiftproj)
 
 A command-line tool for managing Xcode project with Swift Package Manager. I wrote this to make it easy to deploy to Carthage in a Swift Package Manager only project.
 
