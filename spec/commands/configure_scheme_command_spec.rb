@@ -8,10 +8,20 @@ describe Swiftproj::ConfigureSchemeCommand do
   it "raises an error when the required arguments are missing" do
     error_class = Swiftproj::MissingArgumentError
     expect { @command.run({}) }.to raise_error(error_class)
-    expect { @command.run({ "--project" => "a" }) }.to raise_error(error_class)
-    expect { @command.run({ "--scheme" => "b" }) }.to raise_error(error_class)
-    expect { @command.run({ "--buildable-targets" => "c" }) }.to \
-      raise_error(error_class)
+    expect { @command.run({ "--project" => nil }) }.to raise_error(error_class)
+    expect {
+      @command.run({
+        "--project" => "foo",
+        "--scheme" => nil,
+      })
+    }.to raise_error(error_class)
+    expect {
+      @command.run({
+        "--project" => "foo",
+        "--scheme" => "bar",
+        "--buildable-targets" => nil,
+      })
+    }.to raise_error(error_class)
   end
 
   it "raises an error when there's no scheme" do

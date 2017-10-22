@@ -9,9 +9,19 @@ describe Swiftproj::RemoveFrameworkCommand do
     error_class = Swiftproj::MissingArgumentError
     expect { @command.run({}) }.to raise_error(error_class)
     expect { @command.run({ "--project" => nil }) }.to raise_error(error_class)
-    expect { @command.run({ "--target" => nil }) }.to raise_error(error_class)
-    expect { @command.run({ "--framework" => nil }) }.to \
-      raise_error(error_class)
+    expect {
+      @command.run({
+        "--project" => "foo",
+        "--target" => nil,
+      })
+    }.to raise_error(error_class)
+    expect {
+      @command.run({
+        "--project" => "foo",
+        "--target" => "bar",
+        "--framework" => nil,
+      })
+    }.to raise_error(error_class)
   end
 
   it "raises an error when there's no Xcode project" do
