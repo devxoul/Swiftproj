@@ -40,7 +40,7 @@ $ carthage archive URLNavigator,URLMatcher
 ## Installation
 
 ```console
-gem install swiftproj
+$ gem install swiftproj
 ```
 
 ## License
