@@ -1,5 +1,9 @@
 module Swiftproj
   class GenerateXcconfigCommand < Command
+    def self.description()
+      return "Generates a Xcode project file"
+    end
+
     def run(options)
       podspec_path = options["--podspec"]
       if podspec_path.nil?

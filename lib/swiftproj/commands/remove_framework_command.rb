@@ -2,6 +2,10 @@ require "swiftproj"
 
 module Swiftproj
   class RemoveFrameworkCommand < Command
+    def self.description()
+      return "Removes a framework from a target"
+    end
+
     def run(options)
       project_path = options["--project"]
       target_name = options["--target"]

@@ -1,5 +1,9 @@
 module Swiftproj
   class GenerateXcodeprojCommand < Command
+    def self.description()
+      return "Generates a xcconfig file from podspec file"
+    end
+
     def run(options)
       argv = []
       for key, value in options

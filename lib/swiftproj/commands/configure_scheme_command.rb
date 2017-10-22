@@ -2,6 +2,10 @@ require "swiftproj"
 
 module Swiftproj
   class ConfigureSchemeCommand < Command
+    def self.description()
+      return "Configures a scheme to have buildable targets only"
+    end
+
     def run(options)
       project_path = options["--project"]
       scheme_name = options["--scheme"]

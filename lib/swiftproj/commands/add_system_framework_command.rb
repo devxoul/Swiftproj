@@ -2,6 +2,10 @@ require "swiftproj"
 
 module Swiftproj
   class AddSystemFrameworkCommand < Command
+    def self.description()
+      return "Adds a system framework to an existing target"
+    end
+
     def run(options)
       project_path = options["--project"]
       target_name = options["--target"]

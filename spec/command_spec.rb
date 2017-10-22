@@ -53,4 +53,12 @@ RSpec.describe Swiftproj::Command do
       })
     end
   end
+
+  describe "command_name" do
+    it "converts class name into the command name" do
+      expect(Swiftproj::Command.command_name).to be_nil
+      expect(Swiftproj::GenerateXcodeprojCommand.command_name).to \
+        eq "generate-xcodeproj"
+    end
+  end
 end

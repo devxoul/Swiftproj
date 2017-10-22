@@ -54,5 +54,21 @@ module Swiftproj
       end
       return options
     end
+
+    def self.command_name()
+      command_name = self.name \
+        .split("::").last \
+        .gsub(/Command$/, "") 
+        .gsub(/([a-z]+)([A-Z])([a-z]+)/, '\1-\2\3')\
+        .downcase
+      if not command_name.nil? and command_name.empty?
+        return nil
+      end
+      return command_name
+    end
+
+    def self.description()
+      return ""
+    end
   end
 end
