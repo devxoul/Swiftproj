@@ -1,4 +1,4 @@
-require "Swiftproj"
+require "swiftproj"
 
 RSpec.describe Pod::Spec do
   describe "#initialize" do
